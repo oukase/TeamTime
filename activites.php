@@ -209,7 +209,7 @@ if (array_key_exists('add', $_POST)) {
 		INSERT INTO `TBL_DISPO`
 		(`dispo`, `jours possibles`, `peut poser`, `classes possibles`, `absence`, `actif`, `type decompte`, `need_compteur`, `nom_long`, `poids`, `centre`, `team`)
 		VALUES
-		('%s', '%s', '%s', '%s', %1.1f, TRUE, '%s', %s, '%s', 50, '%s', '%s')
+		('%s', '%s', '%s', '%s', %1.1f, TRUE, '%s', %s, '%s', 5000, '%s', '%s')
 		", array_key_exists('nc', $_POST) ? $_SESSION['db']->db_real_escape_string($_POST['nc']) : ''
 		, array_key_exists('jp', $_POST) ? $_SESSION['db']->db_real_escape_string($_POST['jp']) : ''
 		, array_key_exists('pp', $_POST) ? $_SESSION['db']->db_real_escape_string($_POST['pp']) : ''
@@ -218,6 +218,12 @@ if (array_key_exists('add', $_POST)) {
 		, $typeDecompte
 		, $needCompteur
 		, array_key_exists('nl', $_POST) ? $_SESSION['db']->db_real_escape_string($_POST['nl']) : ''
+		, $_SESSION['utilisateur']->centre()
+		, $_SESSION['utilisateur']->team()
+	);
+	$_SESSION['db']->db_interroge($sql);
+	$sql = sprintf(
+		"CALL reorderDispo(51, 51, '%s', '%s'"
 		, $_SESSION['utilisateur']->centre()
 		, $_SESSION['utilisateur']->team()
 	);
