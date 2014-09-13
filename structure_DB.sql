@@ -189,6 +189,7 @@ CREATE TABLE `TBL_DISPO` (
   `Jours possibles` varchar(20) NOT NULL COMMENT 'Liste des jours possibles pour la présence définie',
   `classes possibles` varchar(32) NOT NULL DEFAULT 'all' COMMENT 'la classe d''utilisateurs pour laquelle la dispo est possible',
   `peut poser` varchar(1024) NOT NULL DEFAULT 'all' COMMENT 'Liste des personnes ou classes qui peuvent poser cette dispo (all, classes, ou login)',
+  `rank` tinyint(4) NOT NULL COMMENT 'La rangée d\'affichage de l\'activité'
   `poids` tinyint(4) NOT NULL COMMENT 'Le poids de la dispo permet de définir la place dans le menu',
   `absence` decimal(2,1) NOT NULL COMMENT 'Indique si la dispo correspond à une absence (0), à une présence (1) ou à une demi-équipe (.5)',
   `heures` set('pc','coach','fmp','cds','c','recyclage','rfrt') DEFAULT NULL,
