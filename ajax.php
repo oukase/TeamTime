@@ -404,6 +404,30 @@ if (sizeof($_REQUEST) > 0) {
 			}
 			break;
 		}
+		/*
+		 * Gestion des briefings
+		 */
+		case 'BR:'
+			if ($_SESSION['utilisateur']->hasRole('teamEdit')) {
+				if (array_key_exists('op', $_REQUEST)) {
+					// Type de l'opération à effectuer
+					switch ($_REQUEST['op']) { 
+						// Ajout d'un briefing
+					case 'add':
+						if (!isset($_POST['dateD']) || !isset($_POST['t']) || !isset($_POST['dateF'])) {
+							$err = "Paramètre manquant... :o";
+						} else {
+							$dateD = new Date($_POST['dateD']);
+							$dateF = new Date($_POST['dateF']);
+							if (false === $dateD || false === $dateF || $_POST['t'] != (int) $_POST['t']) {
+								$err = "Paramètre incorrect... :o";
+							} elseif ($_POST['t'] <= sizeof($tables)) {
+								$affectation = $_SESSION['utilisateur']->affectationOnDate($dateD);
+							}
+						break;
+						// Suppression du briefing
+					case 'del':
+						break;
 	}
 }
 
