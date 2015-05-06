@@ -428,7 +428,7 @@ function comptePresents(sId)
 	?>
 	var aAbsent = {<?=substr($absences, 0, -2)?>};
 	var aD = {<?=substr($dispo, 0, -2)?>};
-	var aPresents = {'cds': 0, 'ce': 0, 'fmp' : 0, 'dtch': 0, 'pc': 0, 'c': 0, 'aD':0};
+	var aPresents = {'cds': 0, 'ce': 0, 'fmp' : 0, 'dtch': 0, 'pc': 0, 'theo':0, 'c': 0, 'aD':0};
 	var aListeUid = listeUid();
 	for (var iUid in aListeUid)
 	{
@@ -449,6 +449,7 @@ function comptePresents(sId)
 		}
 	}
 	aPresents['pc'] += aPresents['ce'] + aPresents['cds'] + aPresents['dtch'] + aPresents['fmp'];
+	aPresents['c'] += aPresents['theo'];
 	$('#dec'+sDate).text(aPresents['aD']+"/"+aPresents['pc']+"/"+aPresents['c']);
 	if (aPresents['pc'] < <?=get_sql_globals_constant('effectif_mini')?> && !$('#dec'+sDate).hasClass('protected'))
 	{
