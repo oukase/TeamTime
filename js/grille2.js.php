@@ -90,7 +90,7 @@ function getAvailableOccupations(oThis) {
 		, $find_in_set
 	);
 	$resDispo = $_SESSION['db']->db_interroge($sqlDispo);
-	$sqlCycle = sprintf("SELECT `vacation` FROM `TBL_CYCLE` WHERE `vacation` != '%s'", REPOS);
+	$sqlCycle = sprintf("SELECT `vacation` FROM `TBL_CYCLE` WHERE `vacation` != '%s' AND `centre` = '%s' AND (`team` = '%s' OR `team` = 'all')", REPOS, $affectation['centre'], $affectation['team']);
 	$result = $_SESSION['db']->db_interroge($sqlCycle);
 
 	while ($x = $_SESSION['db']->db_fetch_row($result)) {
